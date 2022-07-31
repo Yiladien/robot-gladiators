@@ -75,9 +75,77 @@ var fight = function(enemyName) {
   }; // end of fight function
 
 
+
+
+// startGame() function to start a new game
+var startGame = function() {
+    // reset player stats
+    playerHealth = 100;
+    playerAttack = 10;
+    playerMoney = 10;
+
     for (var i = 0; i < enemyNames.length; i++) {
-        var pickedEnemyName = enemyNames[i];
-        enemyHealth = 20;
-        // call fight function with enemy-robot
-        fight(enemyNames[i]);
-      }
+
+        if (playerHealth > 0) {
+            window.alert("Welcome to Robot Gladiators! Round " + (i + 1));
+            
+            var pickedEnemyName = enemyNames[i];
+
+            enemyHealth = 50;
+            // call fight function with enemy-robot
+            fight(pickedEnemyName);
+        } else {
+            window.alert("You have lost your robot in battle! Game Over!");
+            break;
+        }
+    }
+
+    // after the loop ends, player is either out of health of enemies to fight, so run the endGame function
+    endGame();
+}
+
+
+// start the game when the page loads
+// startGame();
+
+
+// function to end the entire game
+var endGame = function () {
+    // if player is still alive, player wins!
+    if (playerHealth > 0) {
+        window.alert("Great job, you've survived the game! You now have a score of " + playerMoney + ".");
+    }
+    else {
+        window.alert("You've lost your robot in battle.")
+    }
+    
+    // ask player if they'd like to play again
+    var playAgainConfirm = window.confirm("Would you like to play again?")
+
+    if (playAgainConfirm) {
+        // restart the game
+        startGame();
+    }
+    else {
+        window.alert("Thank you for playing Robot Gladiators! Come back soon!");
+    }
+}
+
+// startGame() function
+//  *function that starts the game
+
+// endGame() function
+//  *function that alets the player's total stats
+//  *asks the player if they want to play again
+//  *if yes, call the startGame() function to restart the game
+//
+
+// shop() function
+//  *Asks the player if they want to "shop"
+//  *if no, continue as normal
+//  *if yes, call the shop() function
+//  *in the shop() function, asks the player if they want to "refill health", "upgrade" attack, or "leave" the shop
+//  *if refill, subtract money points from player and increase attack power
+//  *if leave, alert goodbye and exit the function
+//  *if any other invalid option, call the shop() again
+
